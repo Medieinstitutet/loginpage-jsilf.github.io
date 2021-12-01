@@ -1,0 +1,17 @@
+body {
+    background-color: #162e35;
+    color: #fff3b0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    margin: 10px;
+}
