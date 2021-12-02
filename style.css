@@ -1,11 +1,14 @@
 body {
     background-color: #162e35;
     color: #fff3b0;
+    margin: 0;
 }
 
 header {
     display: flex;
     justify-content: space-between;
+    background-color: #27424b;
+    padding: 1%;
 }
 
 ul {
@@ -14,4 +17,15 @@ ul {
 
 li {
     margin: 10px;
+}
+
+main {
+    background-color: #31464d;
+    height: 60vh;
+    padding: 1%;
+}
+
+footer {
+    background-color: #13252b;
+    padding: 1%;
 }
