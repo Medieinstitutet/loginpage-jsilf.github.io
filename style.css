@@ -23,16 +23,27 @@ li {
 
 main {
     background-color: #31464d;
-    height: 60vh;
+    height: 70vh;
     padding: 1%;
 }
 
 footer {
     background-color: #13252b;
     padding: 1%;
+    width: 100%;
+    position: fixed;
 }
 
-#logoutBtn {
-    max-width: 70px;
-    max-height: 40px;
+input {
+    margin: 1%;
+}
+
+#buttonWrap {
+    display: flex;
+}
+
+button {
+    margin: 1%;
+    background-color: rgb(77, 39, 22);
+    color: white;
 }
