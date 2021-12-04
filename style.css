@@ -38,10 +38,6 @@ input {
     margin: 1%;
 }
 
-#buttonWrap {
-    display: flex;
-}
-
 button {
     margin: 1%;
     background-color: rgb(77, 39, 22);

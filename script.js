@@ -4,7 +4,10 @@ let header = document.getElementById("header");
 let nav = document.getElementById("menu");
 let h1 = document.getElementById("h1");
 let h2 = document.getElementById("h2");
+let h3 = document.getElementById("h3");
+let p = document.getElementById("p");
 let loginWrap = document.getElementById("loginWrap");
+let logoutWrap = document.getElementById("logoutWrap");
 let content = document.getElementById("content");
 
 //startsidan innan inloggning
@@ -21,18 +24,10 @@ let startPage = () => {
     password.id = "password";
     loginWrap.append(password);
 
-    let buttonWrap = document.createElement("div");
-    loginWrap.append(buttonWrap);
-
     let loginBtn = document.createElement("button");
     loginBtn.id = "loginBtn";
     loginBtn.textContent = "Logga in";
-    buttonWrap.append(loginBtn);
-
-    // let createLBtn = document.createElement("button");
-    // createLBtn.id = "createLBtn";
-    // createLBtn.textContent = "Skapa användare";
-    // buttonWrap.append(createLBtn);
+    loginWrap.append(loginBtn);
 };
 
 //anropa funktionen startsida
@@ -47,55 +42,39 @@ let objUsers = [
 ];
 
 //hämta och spara users
-function signUp() {
-
+function logInLS() {
     let userLS = localStorage.getItem("users");
-
     if (userLS) {
         userLS = JSON.parse(userLS);
     } else {
         userLS = [];
     }
-
     localStorage.setItem("users", JSON.stringify(objUsers));
 }
 
 //inloggad sida
 function loggedInPage() {
 
-    let menuList = ["sida1", "sida2", "sida3"];
-    let ul = document.createElement("ul");
+    let username = document.getElementById("username").value;
 
-    for (let i = 0; i < menuList.length; i++) {
-        let li = document.createElement("li");
-        li.id = i;
-        li.innerHTML = menuList[i];
-        ul.append(li);
-    }
-    nav.append(ul);
+    h3.textContent = `Välkommen ${username}!`;
+
+    p.textContent = "Lorem ipsum dolor sit, amet consectetur adipisicing elit.";
+
+    logOut();
+    logInLS();
+    localStorage.setItem("loggedIn", 1);
 }
 
-//knapp för inloggning
+//logga in knapp och content
 loginBtn.addEventListener("click", () => {
 
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
     for (let i = 0; i < objUsers.length; i++) {
-
         if (username == objUsers[i].username && password == objUsers[i].password) {
-
             loggedInPage();
-            signUp();
-            logOut();
-
-            let h3 = document.createElement("h3");
-            h3.innerText = `Välkommen ${username}!`;
-            content.append(h3);
-
-            let p = document.createElement("p");
-            p.innerText = "Lorem ipsum dolor";
-            content.append(p);
             return;
         } else {
             content.innerText = "Fel vid inloggning!";
@@ -103,23 +82,31 @@ loginBtn.addEventListener("click", () => {
         }
     }
 });
-
 //logga ut
 let logOut = () => {
-
-    loginWrap.innerHTML = "";
+    loginWrap.style.display = "none";
 
     let logoutBtn = document.createElement("button");
     logoutBtn.id = "logoutBtn";
     logoutBtn.innerText = "Logga ut";
-    loginWrap.append(logoutBtn);
+    logoutWrap.append(logoutBtn);
 
     logoutBtn.addEventListener("click", () => {
 
-        startPage();
+        logoutBtn.remove();
 
-        localStorage.removeItem("username");
-        localStorage.removeItem("password");
+        content.style.display = "none";
+        loginWrap.style.display = "block";
+        location.reload();
+
+        localStorage.clear();
     });
 };
 
+function checklogin() {
+    if (localStorage.getItem("loggedIn") == 1) {
+        loggedInPage();
+    }
+}
+
+window.onload = checklogin();
