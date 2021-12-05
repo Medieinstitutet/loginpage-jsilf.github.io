@@ -1,7 +1,4 @@
-console.log("hello world");
-
-let header = document.getElementById("header");
-let nav = document.getElementById("menu");
+//hämta id
 let h1 = document.getElementById("h1");
 let h2 = document.getElementById("h2");
 let h3 = document.getElementById("h3");
@@ -16,6 +13,8 @@ let startPage = () => {
     h1.textContent = "Företagslogo";
     h2.textContent = "Logga in här";
 
+    p.textContent = "Företaget lorem ipsum dolor sit amet";
+
     let username = document.createElement("input");
     username.id = "username";
     loginWrap.append(username);
@@ -28,6 +27,11 @@ let startPage = () => {
     loginBtn.id = "loginBtn";
     loginBtn.textContent = "Logga in";
     loginWrap.append(loginBtn);
+
+    // let createBtn = document.createElement("button");
+    // createBtn.id = "createBtn";
+    // createBtn.textContent = "Skapa användare";
+    // loginWrap.append(createBtn);
 };
 
 //anropa funktionen startsida
@@ -56,28 +60,29 @@ function logInLS() {
 function loggedInPage() {
 
     let username = document.getElementById("username").value;
-
     h3.textContent = `Välkommen ${username}!`;
 
     p.textContent = "Lorem ipsum dolor sit, amet consectetur adipisicing elit.";
 
     logOut();
     logInLS();
+    //check login window onload
     localStorage.setItem("loggedIn", 1);
 }
 
-//logga in knapp och content
+//knapp logga in och visa content
 loginBtn.addEventListener("click", () => {
 
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
+    //kolla om inlogget stämmer för att logga in
     for (let i = 0; i < objUsers.length; i++) {
         if (username == objUsers[i].username && password == objUsers[i].password) {
             loggedInPage();
             return;
         } else {
-            content.innerText = "Fel vid inloggning!";
+            p.innerText = "Fel användarnamn eller lösenord, försök igen!";
             return;
         }
     }
@@ -90,11 +95,10 @@ let logOut = () => {
     logoutBtn.id = "logoutBtn";
     logoutBtn.innerText = "Logga ut";
     logoutWrap.append(logoutBtn);
-
+    //knapp logga ut
     logoutBtn.addEventListener("click", () => {
 
         logoutBtn.remove();
-
         content.style.display = "none";
         loginWrap.style.display = "block";
         location.reload();
@@ -102,11 +106,10 @@ let logOut = () => {
         localStorage.clear();
     });
 };
-
+//checka så login stämmer och få sidan sidan att stanna vid reload
 function checklogin() {
     if (localStorage.getItem("loggedIn") == 1) {
         loggedInPage();
     }
 }
-
 window.onload = checklogin();

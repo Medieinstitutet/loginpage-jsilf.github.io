@@ -12,6 +12,10 @@ header {
     padding: 1%;
 }
 
+#loginWrap, #logoutWrap {
+    align-content: flex-end;
+}
+
 ul {
     display: flex;
 }
@@ -27,19 +31,21 @@ main {
     padding: 1%;
 }
 
-footer {
-    background-color: #13252b;
-    padding: 1%;
-    width: 100%;
-    position: fixed;
-}
-
 input {
     margin: 1%;
 }
 
 button {
+    font-size: 1.3rem;
+    width: 7rem;
     margin: 1%;
-    background-color: rgb(77, 39, 22);
-    color: white;
+    background-color: #0e2025;
+    color: #fff3b0;
+}
+
+footer {
+
+    padding: 1%;
+    width: 100%;
+    position: fixed;
 }
